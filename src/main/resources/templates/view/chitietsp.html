@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="/Layout/layout :: headerTitle(~{::title},~{::body})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm</title>
+</head>
+
+<body>
+
+    <div class="w-8/12 mx-auto flex gap-3">
+        <div id="chitiet"
+            class="relative flex mt-5 w-9/12  p-6 rounded-lg shadow-[0_0_15px_0px_rgb(244,244,244)] bg-white">
+            <div class="relative pr-2 w-2/5 ">
+                <div class="w-full flex flex-wrap">
+
+                    <th:block th:each="img,st : ${sp.listhinh}">
+                        <img onclick="change(this)"
+                            th:class="'w-1/6 translate-y-52 object-contain z-50 peer/mini' + ${st.count -1}"
+                            th:src="@{|/image/${img.duongDanHinh}|}" alt="">
+                    </th:block>
+                    <th:block th:each="img,st : ${sp.listhinh}">
+                        <img th:class="'w-full  absolute z-['+${st.first ? '2' : '1'}+'] peer-hover/mini'+  ${st.count -1}+':z-[3]'"
+                            th:src="@{|/image/${img.duongDanHinh}|}" alt="">
+                    </th:block>
+                    <small class="mt-52 text-xs p-4 block border-t-2  border-dashed"> <small>
+                            <br>
+                            <th:block th:each="tt : ${sp.listtt}">
+                                -
+                                <th:block th:text="${tt.tt.tenThuocTinh}" /> :
+                                <th:block th:text="${tt.giaTri}" /> <br>
+                            </th:block>
+                        </small></small>
+                    <a class="text-xs text-[rgb(0,193,255)]">Xem thông tin chi tiết</a>
+
+                </div>
+            </div>
+            <div class="relative pr-2 w-3/5 bg-transparent">
+                <h1 class="font-semibold text-lg" th:text="${sp.tenSP}">
+                </h1>
+                <p class="text-xs my-1 text-gray-600">Thương hiệu <span class="text-[#0000c1]"
+                        th:text="${sp.thuongHieu.giaTri}"></span> | SKU:
+                    240302751</p>
+
+                <p class="font-semibold text-base mt-3 text-[#2142a4]"
+                    th:text="${#numbers.formatDecimal(sp.price *( (100 - sp.sale)/100), 1, 'COMMA', 2, 'POINT')}"></p>
+                <small class="inline-block font-light text-gray-500 text-xs line-through"><small
+                        th:text="${#numbers.formatDecimal(sp.price, 1, 'COMMA', 2, 'POINT')}">
+                    </small>đ</small>
+                <small class=" inline-block font-light  text-[#2142a4] text-xs ">-<small
+                        th:text="${sp.sale}"></small></small>
+
+                <p class="text-white block border-t-2 border-dashed h-0 my-4">.</p>
+                <p class="font-bold text-gray-400 mb-2 text-[10px] font-sans">BẠN SẼ NHẬN ĐƯỢC</p>
+                <div class="flex gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-8 fill-red-500 stroke-white">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                    </svg>
+                    <p class="text-xs">1x Túi đeo lưng/ Balo laptop Targus 15.6 TSB883 Black (Safire)</p>
+                </div>
+                <div class="rounded-md border border-gray-300 p-3 bg-[#f3f7f8]  my-3">
+                    <p class="text-gray-500 text-xs mb-1">CHỌN 1 TRONG NHỮNG KHUYẾN MÃI SAU</p>
+                    <div class="flex gap-3 rounded-md border border-blue-700 p-2 bg-[#f2f5fc]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-20  fill-red-500 stroke-white">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                        </svg>
+                        <div>
+                            <small class="">Giảm 3.500.000₫ (áp dụng vào giá sản phẩm)</small>
+                            <small class=" text-gray-500">Khuyến mãi áp dụng khi mua đủ 1 sản phẩm, mua tối thiểu 1 sản
+                                phẩm</small>
+                            <div class="flex justify-between">
+                                <small class="text-gray-500"><small>HSD: 10/6/2024</small></small>
+                                <small class="text-xs text-[rgb(0,193,255)] "><small>Áp dụng</small></small>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="w-full flex gap-1">
+                    <div
+                        class="w-6/12 rounded bg-[#1434c3] text-white p-2 hover:bg-white hover:text-[#1434c3] hover:border hover:border-blue-800">
+                        <p class="text-xs text-center">MUA NGAY</p>
+                    </div>
+                    <div
+                        class="w-1/2 rounded bg-white text-[#1434c3] p-2 border border-blue-800 hover:bg-[#1434c3] hover:text-white">
+                        <a th:href="@{|/sanpham/giohang/add/${sp.MaSP}|}" class="text-xs text-center">THÊM VÀO GIỎ HÀNG</a>
+                    </div>
+                </div>
+                <p class="text-white block border-t-2 border-dashed h-0 my-4">.</p>
+                <small class="font-bold"><small>Khuyến mãi liên quan</small></small> <br>
+                <small class="">
+                    <small>
+                        + Nhập mã
+                        <span class="font-bold">LAPFA506NF</span>
+                        giảm
+                        <span class="text-red-600">500.000đ </span>
+                        cho đơn hàng có sản phẩm này
+                        <br>
+                        + Giảm thêm đến
+                        <span class="text-red-600">350.000đ </span>
+                        dành cho Học sinh - sinh viên (Không
+                        áp dụng cho các sản phẩm Apple và CPU)
+                        <span class="text-blue-700">Xem chi tiết </span>
+                        <br>
+                        + Nhập mã
+                        <span class="font-bold">ZLPPV</span>
+                        giảm thêm đến
+                        <span class="text-red-600">200.000đ </span>
+                        khi thanh toán qua ZaloPay
+                        <span class="text-blue-700">Xem chi tiết</span>
+                        <br>
+                        + Giảm thêm đến
+                        <span class="text-red-600">1.000.000đ</span>
+                        khi thanh toán bằng VNPAY-QR.
+                        <span class="text-blue-700">Xem chi tiết</span>
+                    </small>
+                </small>
+            </div>
+            <!-- <div id="loadA" class="loadanh"><img src="" id="zoom" alt=""></div>
+            <p id="tat">X</p> -->
+        </div>
+
+        <div class=" mt-5 w-3/12 ">
+            <div class="flex rounded-lg gap-2 items-center shadow-[0_0_15px_0px_rgb(244,244,244)] bg-white p-3">
+                <div class="w-2/12 border aspect-square rounded-full flex justify-center items-center">
+                    <img class="w-full object-contain"
+                        src="https://lh3.googleusercontent.com/qOnchEYD7No58bjEQs5pf_05IV-0DmoaCmEFXD007VHs5cn16LZ6PC98IlY3OiBL9UXsEwNzwiVHRrvSDMQ"
+                        alt="">
+                </div>
+                <p class="w-10/12 text-[11px]">CÔNG TY CỔ PHẦN THƯƠNG MẠI DỊCH VỤ PHONG VŨ ✅</p>
+            </div>
+            <div class="mt-3 rounded-lg items-center shadow-[0_0_15px_0px_rgb(244,244,244)] bg-white p-3">
+                <p class="font-bold text-[10px]">Chính sách bán hàng</p>
+                <div class="flex gap-2">
+                    <div class="w-1/6 flex justify-center items-center">
+                        <img class="w-full transform scale-75"
+                            src="https://lh3.googleusercontent.com/LT3jrA76x0rGqq9TmqrwY09FgyZfy0sjMxbS4PLFwUekIrCA9GlLF6EkiFuKKL711tFBT7f2JaUgKT3--To8zOW4kHxPPHs4=rw"
+                            alt="">
+                    </div>
+                    <p class="text-[9px]">Cam kết hàng chính hãng 100% </p>
+                </div>
+                <div class="flex gap-2">
+                    <div class="w-1/6 flex justify-center items-center">
+                        <img class="w-full transform scale-75"
+                            src="https://lh3.googleusercontent.com/TECKlw8DFChVXu_FAYdNjbCuaDVhmOhbqsKLnayhIgx5Pvv0EX051qHWJR7vUgxiUXN5heAlx4bIDYsoES7X8pby5Pn9LXWN=rw"
+                            alt="">
+                    </div>
+                    <p class="text-[9px]">Đổi trả trong vòng 10 ngày <a href="#">xem chi tiết</a></p>
+                </div>
+
+                <p class="font-bold my-2 text-[10px]">Dịch vụ khác</p>
+                <div class="flex gap-2">
+                    <div class="w-1/6 flex justify-center items-center">
+                        <img class="w-full transform scale-75"
+                            src="https://lh3.googleusercontent.com/cjYniX0PTM1twy6bUEw4nSG47EEsTcFf7O6NRgWfdrq7JpNTccsNkqxnBExVVTGeocVdkUVbupp17dLNFn-E2gG2V-_aejU=rw"
+                            alt="">
+                    </div>
+                    <p class="text-[9px]">Gói dịch vụ bảo hành/ Sửa chữa tận nơi <a href="#">xem chi tiết</a></p>
+                </div>
+            </div>
+            <div id="loadA" class="loadanh"><img src="" id="zoom" alt=""></div>
+            <p id="tat">X</p>
+        </div>
+    </div>
+    <div class="w-8/12 mx-auto flex flex-wrap my-10 bg-white ">
+        <div class="w-8/12 pr-4  ">
+            <h3 class="font-bold mb-3">Mô tả sản phẩm</h3>
+            <img class="w-8/12 " th:src="@{|/image/${sp.listhinh[0].duongDanHinh}|}" alt="">
+            
+			
+            <i class="text-[9px]  leading-none" th:text="${sp.tenSP}"></i>
+
+            <h3 class="font-bold my-3" th:text="${sp.title}"></h3>
+            <th:block th:if="${sp.listhinh.size() > 1}">
+            <img th:src="@{|/image/${sp.listhinh[1].duongDanHinh}|}" alt="">
+        </th:block>
+            <i class="text-[9px]  leading-none" th:text="${sp.tenSP}"></i>
+            <p class="text-[10px] my-1 leading-normal" th:text="${sp.moTa}">
+            </p>
+            <th:block th:if="${sp.listhinh.size() > 2}">
+            <img th:src="@{|/image/${sp.listhinh[2].DuongDanHinh}|}" alt="">
+        </th:block>
+            <i class="text-[9px]  leading-none" th:text="${sp.tenSP}"></i>
+
+            <h3 class="font-bold my-3" th:text="${sp.tenSP}"></h3>
+            <p class="text-[10px] my-1 leading-normal" th:text="${sp.thongTinChiTiet}">
+            </p>
+        </div>
+        <div class="w-4/12 ">
+            <h3 class="font-bold ">Thông tin chi tiết</h3>
+            <table class="min-w-full  text-[9px]">
+                <tbody>
+					
+					<th:block th:each="tt,st : ${sp.listtt}">
+						<tr th:class="${st.odd ? 'bg-white':'bg-gray-100'}">
+		                     <td class="p-3 "th:text="${tt.tt.tenThuocTinh}"></td>
+		                     <td class="p-3 " th:text="${tt.giaTri}"></td>
+		                 </tr>
+					</th:block>
+					
+                   
+                </tbody>
+            </table>
+        </div>
+        <p class="w-full text-white block border-t-2 border-dashed h-0 my-6">.</p>
+        <div  th:replace="/view/sanphamList"></div>
+    </div>
+
+    <div id="zoomax"><img src="" id="zm" class="" alt=""></div>
+    <!--    <script src="loadanh.js"></script>-->
+</body>
+
+</html>

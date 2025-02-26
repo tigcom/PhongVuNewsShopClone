@@ -1,0 +1,80 @@
+ 	<!DOCTYPE html>
+<html lang="en"  th:replace="/Layout/layout :: headerTitle(~{::title},~{::body})">
+<head>
+    <meta charset="UTF-8">
+    <meta th:field="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Người Dùng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body >
+
+    <div class="container mx-auto mt-10">
+		<h2 class="my-4 text-gray-600 font-bold">Thông tin cá nhân</h2>
+        <form action="/user/update" method="POST" th:object="${usLog}" class="flex gap-5 flex-wrap">
+			<input class="hidden" type="text" th:field="*{maNguoiDung}" >
+            <div class="grid grid-cols-1 p-4 md:grid-cols-2 gap-6 w-full rounded-lg shadow-[0_0_15px_0px_rgb(244,244,244)] bg-white">
+                <div>
+                    <label for="ten-dang-nhap" class="block text-sm font-medium text-gray-700">Tên Đăng Nhập</label>
+                    <input type="text" th:field="*{tenDangNhap}" id="ten-dang-nhap" placeholder="Nhập tên đăng nhập"
+                        class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+						<p class="text-red-500 text-sm mt-1" th:errors="*{tenDangNhap}"></p>
+						</div>
+
+                <div>
+                    <label for="mat-khau" class="block text-sm font-medium text-gray-700">Mật Khẩu</label>
+                    <input type="text" th:field="*{matKhau}" id="mat-khau" placeholder="Nhập mật khẩu"
+                        class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+						<p class="text-red-500 text-sm mt-1" th:errors="*{matKhau}"></p>
+                </div>
+
+                <div>
+                    <label for="ho-ten" class="block text-sm font-medium text-gray-700">Họ và Tên</label>
+                    <input type="text" th:field="*{hoTen}" id="ho-ten" placeholder="Nhập họ và tên"
+                        class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+						<p class="text-red-500 text-sm mt-1" th:errors="*{hoTen}"></p>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" th:field="*{email}" id="email" placeholder="Nhập email"
+                        class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+						    <p class="text-red-500 text-sm mt-1" th:errors="*{email}"></p>
+                </div>
+
+                <div>
+                    <label for="so-dien-thoai" class="block text-sm font-medium text-gray-700">Số Điện Thoại</label>
+                    <input type="text" th:field="*{soDienThoai}" id="so-dien-thoai" placeholder="Nhập số điện thoại"
+                        class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+						<p class="text-red-500 text-sm mt-1" th:errors="*{soDienThoai}"></p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Vai Trò</label>
+					<div class="mt-2 space-y-2">
+					    <label class="inline-flex items-center">
+					        <input type="radio" th:field="*{vaiTro}" value="false" class="form-radio text-[#1434c3]">
+					        <span class="ml-2">User</span>
+					    </label>
+					    <label class="inline-flex items-center">
+					        <input type="radio" th:field="*{vaiTro}" value="true" class="form-radio text-[#1434c3]">
+					        <span class="ml-2">Admin</span>
+					    </label>
+						<p class="text-red-500 text-sm mt-1" th:errors="*{vaiTro}"></p>
+					</div>
+                </div>
+            </div>
+
+            <div class="mt-6 flex justify-center space-x-4 w-full ">
+                <button type="reset" class="w-24 py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#61ebf6]">
+                    Reset
+                </button>
+                <button type="submit" class="w-24 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#1434c3] hover:bg-[#61ebf6] focus:outline-none focus:ring-2 focus:ring-[#61ebf6]">
+                    Lưu
+                </button>
+            </div>
+        </form>
+    </div>
+	
+</body>
+</html>

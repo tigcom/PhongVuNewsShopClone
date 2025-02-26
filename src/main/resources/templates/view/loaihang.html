@@ -1,0 +1,91 @@
+ 	<!DOCTYPE html>
+<html lang="en"  th:replace="/Layout/layout :: headerTitle(~{::title},~{::body})">
+<head>
+    <meta charset="UTF-8">
+    <meta th:field="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý loại hàng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body >
+
+    <div class="container mx-auto mt-10">
+		<h2 class="my-4 text-gray-600 font-bold">Quản lý loại hàng</h2>
+        <form action="/user/createLH"ac method="POST" th:object="${loaiHang}" class="flex gap-5 flex-wrap">
+            <div class="grid grid-cols-1 p-4 md:grid-cols-2 gap-6 w-full rounded-lg shadow-[0_0_15px_0px_rgb(244,244,244)] bg-white">
+                <div>
+                    <label  class="block text-sm font-medium text-gray-700">Mã loại hàng</label>
+                    <input type="text" th:field="*{maLoaiHang}" placeholder="Nhập mã loại hàng"
+                        class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+						<p class="text-red-500 text-sm mt-1"></p>
+						</div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Tên loại hàng</label>
+                    <input type="text" th:field="*{tenLoaiHang}" id="mat-khau" placeholder="Tên loại hàng"
+                        class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+						<p class="text-red-500 text-sm mt-1" th:errors="*{tenLoaiHang}"></p>
+                </div>
+
+                <div>
+                    <label  class="block text-sm font-medium text-gray-700">Hình ảnh</label>
+                    <input type="text" th:field="*{hinhanh}" id="ho-ten" placeholder="Nhập họ và tên"
+                        class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+						<p class="text-red-500 text-sm mt-1" th:errors="*{hinhanh}"></p>
+                </div>
+
+				<div class="mb-6">
+				       <label for="inputNumber" class="block text-lg font-semibold text-gray-800">Nhập số thuộc tính:</label>
+				       <input type="number" id="inputNumber" min="1" max="10" placeholder="Nhập số lượng" 
+				              class="mt-2 block w-5/12 shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+				       <div onclick="generateDivs()" 
+				               class="mt-4 bg-blue-500 text-white px-6 py-2 w-1/4 rounded-md hover:bg-blue-600">
+				           Tạo thuộc tính
+				       </div>
+				   </div>
+				   <div id="outputContainer" class="space-y-4"></div>
+
+
+
+            </div>
+
+            <div class="mt-6 flex justify-center space-x-4 w-full ">
+                <button type="reset" class="w-24 py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#61ebf6]">
+                    Reset
+                </button>
+                <button type="submit" class="w-24 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#1434c3] hover:bg-[#61ebf6] focus:outline-none focus:ring-2 focus:ring-[#61ebf6]">
+                    Lưu
+                </button>
+            </div>
+        </form>
+    </div>
+	<script>
+	      function generateDivs() {
+	          const inputNumber = document.getElementById('inputNumber').value;
+	          const container = document.getElementById('outputContainer');
+
+	          container.innerHTML = '';
+
+	          const num = parseInt(inputNumber);
+
+	          if (isNaN(num) || num <= 0) {
+	              alert("Vui lòng nhập số nguyên dương hợp lệ!");
+	              return;
+	          }
+
+	          for (let i = 1; i <= num; i++) {
+	              const div = document.createElement('div');
+	              div.className = "p-4 border border-gray-300 rounded-lg";
+
+	              div.innerHTML = `
+	                  <label class="block text-sm font-medium text-gray-700">Tên thuộc tính ${i}</label>
+	                  <input type="text" name="tenThuocTinh"
+	                      class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+	              `;
+	              container.appendChild(div);
+	          }
+	      }
+	  </script>
+	
+</body>
+</html>

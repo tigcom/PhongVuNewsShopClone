@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="/Layout/layout :: headerTitle(~{::title},~{::body})">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Đăng ký</title>
+</head>
+
+<body>
+	<div class="flex justify-center items-center w-6/12 mx-auto">
+		<form action="/user/dangky" th:object="${user}" method="post"
+			class="relative flex w-2/3 flex-col rounded-xl bg-white text-gray-700 shadow-md my-20">
+			<input th:field="*{matKhau}" type="text"
+					        class="hidden" />
+			<div th:if="${sai == null}"
+				class="bg-gradient-to-tr from-green-600 to-green-400 relative mx-4 -mt-6 mb-4 grid h-24 place-items-center rounded-xl text-white shadow-lg shadow-green-500/40">
+				<h3 class="text-3xl font-semibold">Đăng ký</h3>
+			</div>
+
+			<div th:if="${sai != null}"
+				class="bg-gradient-to-tr from-red-600 to-yellow-200 relative mx-4 -mt-6 mb-4 grid h-24 place-items-center rounded-xl text-white shadow-lg shadow-red-500/40">
+				<h3 th:text="${sai}" class="text-3xl font-semibold"></h3>
+			</div>
+
+			<div class="grid grid-cols-2 gap-6 p-6">
+				<div>
+					<label class="block text-sm font-semibold text-blue-gray-500 mb-1">Tên Đăng Nhập</label>
+					<input th:field="*{tenDangNhap}" placeholder=""
+						class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none" />
+					<small class="block text-xs text-red-400 mt-1" th:errors="*{tenDangNhap}"></small>
+				</div>
+
+				<div>
+					<label class="block text-sm font-semibold text-blue-gray-500 mb-1">Họ Tên</label>
+					<input th:field="*{hoTen}" placeholder=""
+						class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none" />
+					<small class="block text-xs text-red-400 mt-1" th:errors="*{hoTen}"></small>
+				</div>
+
+				<div>
+					<label class="block text-sm font-semibold text-blue-gray-500 mb-1">Email</label>
+					<input th:field="*{email}" placeholder=""
+						class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none" />
+					<small class="block text-xs text-red-400 mt-1" th:errors="*{email}"></small>
+				</div>
+
+				<div>
+					<label class="block text-sm font-semibold text-blue-gray-500 mb-1">Số Điện Thoại</label>
+					<input th:field="*{soDienThoai}" placeholder=""
+						class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none" />
+					<small class="block text-xs text-red-400 mt-1" th:errors="*{soDienThoai}"></small>
+				</div>
+
+				<input th:field="*{vaiTro}" type="hidden" value="false" />
+			</div>
+
+			<div class="p-6 pt-0">
+				<button type="submit"
+					class="block w-full rounded-lg bg-gradient-to-tr from-green-600 to-green-400 py-3 text-center text-xs font-bold uppercase text-white shadow-md transition-all hover:shadow-lg hover:shadow-green-500/40 active:opacity-85">
+					Đăng ký
+				</button>
+				<p class="mt-6 flex justify-center text-sm text-inherit">
+					Đã có tài khoản?
+					<a class="ml-1 font-bold text-green-500" href="/user/login">Đăng nhập</a>
+				</p>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

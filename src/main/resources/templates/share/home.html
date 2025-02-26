@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="/Layout/layout :: headerTitle(~{::title},~{::body})">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Phong Vũ</title>
+</head>
+
+<body>
+	<header class="mb-24 overflow-hidden w-full">
+		<div class="w-full mt-3 relative">
+			<div class="w-full">
+				<div id="gf" class="flex transition-transform duration-700 ease-in-out transform">
+					<img id="anh"
+						src="https://lh3.googleusercontent.com/S7NE0LqhEze7KX1blpQdtXS3EAcodXzlVwMvNeTOXMe9Gkftr_7kSLsIRKGcecknk1hoQToa0Eol5GDvTpUJmGGk4UtTsgA=w1920-rw"
+						alt="">
+					<img src="https://lh3.googleusercontent.com/2gGzf4Xpb1EbicYg3rRGZuU-1HLK7YoDVMR6oDigHHtVeObeJtk4_FPIY4X5Stt6Op-gGhbeZ4wSEmd3a7HN0sTRjJTAYTw9=w1920-rw"
+						alt="">
+					<img src="https://lh3.googleusercontent.com/gVSB0hwR3PPffHSS8AFdHY-hmyooxWgDENN1rb_waJwfKGg7omvKuAcf9kZM0z8ssRNaGQOnecJzT1b05TTa_0IrxKkLOzK2=w1920-rw"
+						alt="">
+					<img src="https://lh3.googleusercontent.com/KiSne6MkJU8o02VeUXFgvCgF6zpeh352Bclmv4cdRT3iwdFfMPUsg2xhQETiF6SH2hdZ-NY0J9pa1uMkux1QFVMBNtNz2Ww=w1920-rw"
+						alt="">
+					<img src="https://lh3.googleusercontent.com/s3F4KLm_lgD91bw7mJTa9cN2Ljs86o6MKV-9yYCPqypov2cwvRd-b6fi3986OuJUA_8hzUpXZuOrTnep97MZo_Gi6f9klHK6=w1920-rw"
+						alt="">
+					<img src="https://lh3.googleusercontent.com/dRlNChKfjjLx2WbAyxYPk6G3yFqtg98lL5n9tSDUSeZIv6Tv495cWJ80ymWYuWESYN07BZFlpKY324dYqwZHDWjrLAcl-DQ=w1920-rw"
+						alt="">
+				</div>
+			</div>
+
+			<div id="ntx" class="absolute top-40 right-0 opacity-0  bg-black pl-4 rounded-l-full">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="7 -8 40 40" stroke-width="1.5"
+					stroke="currentColor" class="text-gray-200 w-7 size-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+				</svg>
+
+			</div>
+			<div id="per" class="absolute top-40 left-64  bg-black opacity-0 pr-4 rounded-r-full">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-19 -8 40 40" stroke-width="1.5"
+					stroke="currentColor" class="text-gray-200 w-7 size-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+				</svg>
+
+
+			</div>
+			<div id="cham1" class="absolute bottom-12 opacity-70 left-1/2 flex gap-2 ">
+				<div id="pi1" onclick="dichuyen1(this)" index="1" class="bi rounded-full w-2 h-2 bg-gray-200 "></div>
+				<div id="pi2" onclick="dichuyen1(this)" index="2" class="bi rounded-full w-2 h-2 bg-gray-200 "></div>
+				<div id="pi3" onclick="dichuyen1(this)" index="3" class="bi rounded-full w-2 h-2 bg-gray-200 "></div>
+				<div id="pi4" onclick="dichuyen1(this)" index="4" class="bi rounded-full w-2 h-2 bg-gray-200 "></div>
+				<div id="pi5" onclick="dichuyen1(this)" index="5" class="bi rounded-full w-2 h-2 bg-gray-200 "></div>
+				<div id="pi6" onclick="dichuyen1(this)" index="6" class="bi rounded-full w-2 h-2 bg-gray-200 "></div>
+			</div>
+			<div class="menuCOn hover:w-9/12  group absolute top-3 left-40 bg-white h-[85%] py-4 rounded-lg ">
+				<ul class="relative">
+					<th:block th:each="lh: ${listLH}">
+						<li>
+							<div class="peer px-3 rounded-md ">
+								<a th:href="@{|/home/filterLoaiHang?mloaiHang=${lh.MaLoaiHang}|}" class="text-[8px] font-bold hover:bg-blue-100 inline-block " th:text="${lh.tenLoaiHang}"></a>
+							</div>
+							<div class="left-28 top-0   pl-32 w-10/12 hidden peer-hover:block hover:block absolute">
+								<ul class="gap-5 text-[10px] w-8/12 text-gray-600 flex flex-wrap">
+									<th:block th:each="tt : ${lh.listtt}">
+										<div class="w-2/12">
+											<li>
+												<a href="" class="font-bold text-blue-800"
+													th:text="${tt.tenThuocTinh}"></a>
+												<ul class="ulChau">
+													<th:block th:each="ttin : ${tt.distinctThongTin}">
+														<li class="liChau"><a th:href="@{|/home/filterMenu?mThuocTinh=${ttin.tt.maThuocTinh}&giaTri=${ttin.giaTri}|}"
+															 th:text="${ttin.giaTri}"></a></li>
+													</th:block>
+												</ul>
+											</li>
+
+										</div>
+									</th:block>
+								</ul>
+							</div>
+						</li>
+
+					</th:block>
+
+				</ul>
+			</div>
+
+		</div>
+		<div class="z-10 absolute bottom-10 left-44 flex gap-4">
+			<div class="w-1/5">
+				<img class="rounded-2xl shadow-md transform transition-transform hover:scale-105  duration-300"
+					src="https://lh3.googleusercontent.com/uw9Ld5snWK_fdXmhM4i_e8Uonzeo25tFpyWCCHk4g9pF-BY0SAsxGZ6phCPE04pdAF5QS-GoaqTW_a78hvOAQURFqZIi7OGN=w308-rw"
+					alt="">
+			</div>
+			<div class="w-1/5">
+				<img class="rounded-2xl shadow-md transform transition-transform hover:scale-105  duration-300"
+					src="https://lh3.googleusercontent.com/-KyPHoUjMjLPF_RJN3sse0JHpDAsHuV06pUit4UwQFo7B6uyF8FVzT1vI273GjL6unD5pTARUFLpeC-4ooUTSFHWTbKmjNY=w308-rw"
+					alt="">
+			</div>
+			<div class="w-1/5">
+				<img class="rounded-2xl shadow-md transform transition-transform hover:scale-105  duration-300"
+					src="https://lh3.googleusercontent.com/s0Q6ru7op5eVKrQX6LCwz470sdzy77VnUqkkIL0OHDDieiz4U10uUXv6B8sbU0zDdHPNelNPYJUKR6c9VLTq8mkAGu9JsgQf=w308-rw"
+					alt="">
+			</div>
+			<div class="w-1/5">
+				<img class="rounded-lg shadow-md transform transition-transform hover:scale-105  duration-300"
+					src="https://lh3.googleusercontent.com/M50KpWhdJpPB0IWs-a11u0QXOWusR_SrzZYMDZsqCpxNZF0OVFC5FU0QFpzY2-U_ZIYRlX2TNTBwW9dnizMKnrE_SBAyoo_Q=w308-rw"
+					alt="">
+			</div>
+		</div>
+	</header>
+
+	<div class="mx-auto my-4 w-11/12">
+
+		<div id="saleoff" class="relative">
+
+
+		</div>
+
+		<div class="relative">
+			<img class="w-full rounded-tr-3xl"
+				src="https://lh3.googleusercontent.com/wsOAFUd5nYsJSTi4Iuex4FYRLP8aCTWgMB-IdE1vvxbebq9J9qeKBRsc3UqKLn-QTZf9O-kJi1Gf8MdwS1hengv3jUcnkRGpww=rw-w1920"
+				alt="">
+
+			<div class="absolute bottom-32 left-44 text-white border-2 border-white shadow-inner p-3 rounded-3xl">
+				<h3>Săn phụ kiện <br> Apple</h3>
+				<p>ưu dãi 57%</p>
+			</div>
+			<div class="absolute w-8/12 space-x-4 bottom-3 right-5  flex ">
+				<div
+					class=" hover:shadow-[inset_0_0_10px_2px_#8000d6] bg-white text-left w-1/4 p-4 rounded-tr-3xl rounded-bl-3xl ">
+					<img style="box-shadow:  0px 0px 6px #8000d6;"
+						class="m-auto w-11/12 rounded-tr-3xl rounded-bl-3xl hover:scale-110 transform transition-transform duration-300"
+						src="https://lh3.googleusercontent.com/vhAx9hAkH-nR37CEVBRqykUBLqpudFOcX2YrBjr18SGR_0N5YxW8Kh5oORhT9rwqehJs1HlUYUoqoP7q0RY=w230-rw"
+						alt="">
+					<h3 class="text-gray-400 leading-9">APPLE</h3>
+					<P class="text-xs text-gray-500 leading-5">Củ sạc nhanh Apple iPhone
+						ZUW USD-C (MHJE SLA/A)</P>
+					<h1 class="text-blue-800 text-lg">379.000 đ</h1>
+					<small class="">
+						<span class="line-through text-gray-400">
+							800.000
+							<span class="underline text-gray-400">
+								đ
+							</span>
+						</span>
+						<span class="text-blue-800">
+							-57.42%
+						</span>
+					</small> <br>
+					<a class="block text-blue-800 border rounded-tr-2xl rounded-bl-2xl border-blue-800 p-2 text-center mt-2"
+						href="#">Thêm vào giỏ</a>
+				</div>
+
+				<div
+					class="hover:shadow-[inset_0_0_10px_2px_#8000d6] bg-white text-left w-1/4 p-4 rounded-tr-3xl rounded-bl-3xl">
+					<img style="box-shadow: 0px 0px 6px #8000d6;"
+						class="m-auto w-11/12 rounded-tr-3xl rounded-bl-3xl hover:scale-110 transform transition-transform duration-300"
+						src="https://lh3.googleusercontent.com/2yzrqVagDwHD8ojkGQ3JdDwY0JYTq52txWqCklThhOv12L1apqO3n8Lqk0ExVBJt_2P66StuvYdxGBeoD2ygYXW2zzVYikF2=w230-rw"
+						alt="">
+					<h3 class="text-gray-400 leading-9">APPLE</h3>
+					<P class="text-xs text-gray-500 leading-5">Chuột Apple Magic Mouse 2021 (MK2E3ZA/A)</P>
+					<h1 class="text-blue-800 text-lg">1.290.000 đ</h1>
+					<small>
+						<span class="line-through text-gray-400">2.499.000 <span
+								class="underline text-gray-400">đ</span></span>
+						<span class="text-blue-800">-48.19%</span>
+					</small> <br>
+					<a class="block text-blue-800 border rounded-tr-2xl rounded-bl-2xl border-blue-800 p-2 text-center mt-2"
+						href="#">Thêm vào giỏ</a>
+				</div>
+
+				<div
+					class="hover:shadow-[inset_0_0_10px_2px_#8000d6] bg-white text-left w-1/4 p-4 rounded-tr-3xl rounded-bl-3xl">
+					<img style="box-shadow: 0px 0px 6px #8000d6;"
+						class="m-auto w-11/12 rounded-tr-3xl rounded-bl-3xl hover:scale-110 transform transition-transform duration-300"
+						src="https://lh3.googleusercontent.com/hA-QSFbE1mDHGxEP3TDNIMx5_ATd9Q6C0T6iYuWVQ6Tr3o-21JygScx1ilQrpDOxSH9gnK7kH3ErtrbaGn8L6-rAPdWqznXVyw=w230-rw"
+						alt="">
+					<h3 class="text-gray-400 leading-9">APPLE</h3>
+					<P class="text-xs text-gray-500 leading-5">Cáp sạc Apple USB-C dây dù Woven Charge Cable (1 m)
+						(MQKJ3ZA/A)</P>
+					<h1 class="text-blue-800 text-lg">449.000 đ</h1>
+					<small>
+						<span class="line-through text-gray-400">690.000 <span
+								class="underline text-gray-400">đ</span></span>
+						<span class="text-blue-800">-34.93%</span>
+					</small> <br>
+					<a class="block text-blue-800 border rounded-tr-2xl rounded-bl-2xl border-blue-800 p-2 text-center mt-2"
+						href="#">Thêm vào giỏ</a>
+				</div>
+
+				<div
+					class="hover:shadow-[inset_0_0_10px_2px_#8000d6] bg-white text-left w-1/4 p-4 rounded-tr-3xl rounded-bl-3xl">
+					<img style="box-shadow: 0px 0px 6px #8000d6;"
+						class="m-auto w-11/12 rounded-tr-3xl rounded-bl-3xl hover:scale-110 transform transition-transform duration-300"
+						src="https://lh3.googleusercontent.com/1Y11hFr4u6bZF8GxdhIeUautp4KLzkehMe6IsMlXVjkkJm64G1ZmaAlIcvdox884HZB18SlloPiRn2hmJLTA7xoTfWzzOKU=w230-rw"
+						alt="">
+					<h3 class="text-gray-400 leading-9">APPLE</h3>
+					<P class="text-xs text-gray-500 leading-5">Tai nghe Apple AirPods (MPNY3ZP/A) (Lightning Charging
+						Case)</P>
+					<h1 class="text-blue-800 text-lg">3.890.000 đ</h1>
+					<small>
+						<span class="line-through text-gray-400">5.490.000 <span
+								class="underline text-gray-400">đ</span></span>
+						<span class="text-blue-800">-29.14%</span>
+					</small> <br>
+					<a class="block text-blue-800 border rounded-tr-2xl rounded-bl-2xl border-blue-800 p-2 text-center mt-2"
+						href="#">Thêm vào giỏ</a>
+				</div>
+
+			</div>
+		</div>
+		<div class="w-full flex mt-4">
+			<div>
+				<img class="rounded-lg transform hover:scale-105 transform transition-transform duration-300"
+					src="https://lh3.googleusercontent.com/0XMyTTi61mF36Dui7tOqZtKJzrjXpn5eco8OwVpijFExkTEJKyRpYmP9H3fbEDhi3sOZ5YA6BecKgWbTRTkbG8dPD88u5SMVeQ=w616-rw"
+					alt="">
+			</div>
+			<div class="text-white m-1"> .</div>
+			<div>
+				<img class="rounded-lg transform hover:scale-105 transform transition-transform duration-300"
+					src="https://lh3.googleusercontent.com/x9-nhdVo2mkxCEzmJs2IjANebQtKWGXTp6IByithLLltmQwlmaBWE6Xy4v771A3JZarJlsMgalbOJnozRPK-I3mYVuBoTE0=w616-rw"
+					alt="">
+			</div>
+		</div>
+
+		<div style="background-color: #59d2ff;" class="felx w-full  mt-5 mb-3">
+			<div class="flex justify-between w-full p-4">
+				<h1 class="text-white ">SẢN PHẨM MỚI ĐĂNG</h1>
+				<small class="text-white" href="#">Xem tất cả <i class="fa-solid fa-angle-right"></i></small>
+			</div>
+			<hr>
+			<div class="flex gap-5 justify-center items-center p-5 ">
+
+				<div style="box-shadow: inset 0px 0px 30px #59d2ff;" class="flex bg-white gap-5 p-5 rounded-md">
+					<div class="w-2/4 ">
+						<img class="w-full transform hover:scale-110 transform transition-transform duration-300 rounded"
+							src="https://lh3.googleusercontent.com/14we-A_sHetkVCPSOEBYD6wYzqii4NBQdBJ1NWtea1Pg_DGlWkAHorv_6rgLlkIEXetVYDeEjuqem2uHBVHEw_x7FyIDcGAmJg=w230-rw"
+							alt="">
+					</div>
+					<div class="">
+						<h3 class="text-gray-400 leading-9">SAMSUNG</h3>
+						<P class="text-xs text-gray-500 leading-5">Smart Tivi Samsung 4K UHD 55 inch UA55AU7002`</P>
+						<h1 class="text-blue-800 text-lg">11.490.000 đ</h1>
+						<small class="">
+							<span class="line-through text-gray-400">
+								10.400.000
+								<span class="underline text-gray-400">
+									đ
+								</span>
+							</span>
+							<span class="text-blue-800">
+								-13.56%
+							</span>
+						</small> <br>
+						<a class="block text-blue-800 border rounded-lg border-blue-800 p-2 text-center mt-2"
+							href="#">Thêm vào giỏ</a>
+					</div>
+				</div>
+				<div style="box-shadow: inset 0px 0px 30px #59d2ff;" class="flex bg-white gap-5 p-5 rounded-md">
+					<div class="w-2/4">
+						<img class="w-full transform hover:scale-110 transition-transform duration-300 rounded"
+							src="https://lh3.googleusercontent.com/kUmQiT4IIxsseR869anyrZzrLnN6e7PomaarFW-32HLIUt7G0kS9OX-dATnuozyEjibhJxmyzuzcOSDWbUzI9k4yBy13wy4=w230-rw"
+							alt="">
+					</div>
+					<div>
+						<h3 class="text-gray-400 leading-9">DEERMA</h3>
+						<p class="text-xs text-gray-500 leading-5">Máy xay sinh tố cầm tay không dây Deerma DEM-NU30</p>
+						<h1 class="text-blue-800 text-lg">299.000 đ</h1>
+						<small>
+							<span class="line-through text-gray-400">390.000 <span
+									class="underline text-gray-400">đ</span></span>
+							<span class="text-blue-800">-23.33%</span>
+						</small> <br>
+						<a class="block text-blue-800 border rounded-lg border-blue-800 p-2 text-center mt-2"
+							href="#">Thêm vào giỏ</a>
+					</div>
+				</div>
+
+				<div style="box-shadow: inset 0px 0px 30px #59d2ff;" class="flex bg-white gap-5 p-5 rounded-md ">
+					<div class="w-2/4">
+						<img class="w-full transform hover:scale-110 transition-transform duration-300 rounded"
+							src="https://lh3.googleusercontent.com/bc0P4jM2zDj5uvkkmOHSXaGP_Tn4hJpl9VnR5L4Zp-a0hkteVBhdWundR4xYxLE-npZasZaAXw70Voql1er8STO3Lsy_02in=w230-rw"
+							alt="">
+					</div>
+					<div>
+						<h3 class="text-gray-400 leading-9">TOSHIBA</h3>
+						<p class="text-xs text-gray-500 leading-5">Máy giặt Toshiba Inverter 10.5Kg TW-BK115G4V (MG)</p>
+						<h1 class="text-blue-800 text-lg">8.490.000 đ</h1>
+						<small>
+							<span class="line-through text-gray-400">10.490.000 <span
+									class="underline text-gray-400">đ</span></span>
+							<span class="text-blue-800">-19.07%</span>
+						</small> <br>
+						<a class="block text-blue-800 border rounded-lg border-blue-800 p-2 text-center mt-2"
+							href="#">Thêm vào giỏ</a>
+					</div>
+				</div>
+
+			</div>
+			<div class="flex justify-center space-x-4">
+				<div
+					class="rounded-md border border-blue-100 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full" src="image/maylanh.png" alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Máy lạnh</p>
+				</div>
+
+				<div
+					class="rounded-md border border-blue-100 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full" src="image/tv.png" alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Tivi</p>
+				</div>
+
+				<div
+					class="rounded-md border border-blue-100 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full" src="image/mayin.png" alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Máy in</p>
+				</div>
+
+				<div
+					class="rounded-md border border-blue-100 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full" src="image/loa.png" alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Loa</p>
+				</div>
+
+				<div
+					class="rounded-md border border-blue-100 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full" src="image/maygiat.png" alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Máy giặt</p>
+				</div>
+
+				<div
+					class="rounded-md border border-blue-100 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full" src="image/tulanh.png" alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Tủ lạnh</p>
+				</div>
+
+				<div
+					class="rounded-md border border-blue-100 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full" src="image/maynuocnong.png" alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Máy nước nóng</p>
+				</div>
+			</div>
+
+
+
+
+		</div>
+		<div class="">
+			<img class="w-full mx-auto my-2 rounded-md transition-transform transform duration-500 ease-in-out hover:scale-105"
+				src="https://lh3.googleusercontent.com/KcqJlazpoII6RSNTL51yYdVTJsePRAQh4jrObK8oziqT0B_10ZKuq1e8gudrygF-iBuLIE7PM4LiZnDDRUJJXU0Vr_CDcQ2q=w1232-rw"
+				alt="Image">
+		</div>
+
+		<div style="background-color: #3bdda4;" class="felx w-full  mt-5 ">
+			<div class="flex justify-between w-full p-4">
+				<h1 class="text-white ">DANH MỤC NỔI BẬT</h1>
+				<small class="text-white" href="#">Xem tất cả <i class="fa-solid fa-angle-right"></i></small>
+			</div>
+			<hr>
+			<div class="flex gap-5 justify-center items-center p-5 ">
+
+				<div style="box-shadow: inset 0px 0px 30px #3bdda4;" class="flex bg-white gap-5 p-5 rounded-md">
+					<div class="w-2/4 ">
+						<img class="w-full transform hover:scale-110 transform transition-transform duration-300 rounded"
+							src="https://lh3.googleusercontent.com/wxwqYcEobO1IblY-dsEHmX1ilKSvQ2T28F0TnS7EI-dMslwjiBSivvjBAqu73-C1Oqd_cM7XYfMS_8Zerpvm67go4IZ9xcKA=w230-rw"
+							alt="">
+					</div>
+					<div class="">
+						<h3 class="text-gray-400 leading-9">INTEL</h3>
+						<P class="text-xs text-gray-500 leading-5">CPU INTEL Core i5-12400 (6C/12T, 2.50 GHz - 4.40 GHz,
+							18MB) - 1700</P>
+						<h1 class="text-blue-800 text-lg">4.170.000 ₫</h1>
+						<small class="">
+							<span class="line-through text-gray-400">
+								6.439.000
+								<span class="underline text-gray-400">
+									đ
+								</span>
+							</span>
+							<span class="text-blue-800">
+								-35.24%
+							</span>
+						</small> <br>
+						<a class="block text-blue-800 border rounded-lg border-blue-800 p-2 text-center mt-2"
+							href="#">Thêm vào giỏ</a>
+					</div>
+				</div>
+				<div style="box-shadow: inset 0px 0px 30px #3bdda4;" class="flex bg-white gap-5 p-5 rounded-md">
+					<div class="w-2/4">
+						<img class="w-full transform hover:scale-110 transition-transform duration-300 rounded"
+							src="https://lh3.googleusercontent.com/R456bjilFfPSmy6hvQaAiNSYaG2cw08tFhs8vKOCfQdGiBJxaqDWYJoWunIBAPp4iG8B603HqI6PZA8EY7Uwg0A13AjMSGqw=w230-rw"
+							alt="">
+					</div>
+					<div>
+						<h3 class="text-gray-400 leading-9">GIGABYTE</h3>
+						<p class="text-xs text-gray-500 leading-5">Mainboard GIGABYTE B760M DS3H DDR4</P>
+						<h1 class="text-blue-800 text-lg">2.949.000 đ</h1>
+						<small>
+							<span class="line-through text-gray-400">3.990.000 <span
+									class="underline text-gray-400">đ</span></span>
+							<span class="text-blue-800">-26.09%</span>
+						</small> <br>
+						<a class="block text-blue-800 border rounded-lg border-blue-800 p-2 text-center mt-2"
+							href="#">Thêm vào giỏ</a>
+					</div>
+				</div>
+
+				<div style="box-shadow: inset 0px 0px 30px #3bdda4;" class="flex bg-white gap-5 p-5 rounded-md ">
+					<div class="w-2/4">
+						<img class="w-full transform hover:scale-110 transition-transform duration-300 rounded"
+							src="https://lh3.googleusercontent.com/OKSnVgDJI9eGkCkOYS3lmsdupBJroIptWDRWrz4PcAfn4_zQv5G7K4EggZ_w9OeLEPem4rTWrQQPjl8rflf-1IOKsGsSAi0=w230-rw"
+							alt="">
+					</div>
+					<div>
+						<h3 class="text-gray-400 leading-9">ASUS</h3>
+						<p class="text-xs text-gray-500 leading-5">Card màn hình ASUS Dual GeForce RTX 4060 08GB GDDR6
+							EVO 8GB GDDR6</p>
+						<h1 class="text-blue-800 text-lg">8.990.000 đ</h1>
+						<small>
+							<span class="line-through text-gray-400">9.590.000 <span
+									class="underline text-gray-400">đ</span></span>
+							<span class="text-blue-800">-6.26%</span>
+						</small> <br>
+						<a class="block text-blue-800 border rounded-lg border-blue-800 p-2 text-center mt-2"
+							href="#">Thêm vào giỏ</a>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="flex justify-center space-x-4">
+				<div
+					class="rounded-md border border-green-300 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full"
+							src="https://upload.wikimedia.org/wikipedia/commons/e/e4/AVANT-P870DMG-GAMING-LAPTOP.png"
+							alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Laptop</p>
+				</div>
+
+				<div
+					class="rounded-md border border-green-300 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full"
+							src="https://resource.logitechg.com/w_692,c_lpad,ar_4:3,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-wireless-gaming-mouse/pro-wireless-carbon-gallery-1.png?v=1"
+							alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Chuột máy tính</p>
+				</div>
+
+				<div
+					class="rounded-md border border-green-300 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full"
+							src="https://www.freeiconspng.com/thumbs/iphone-x-pictures/apple-iphone-x-pictures-5.png"
+							alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Iphone</p>
+				</div>
+
+				<div
+					class="rounded-md border border-green-300 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full" src="https://cdn.pixabay.com/photo/2013/07/12/19/16/hdd-154463_1280.png"
+							alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Ổ cứng</p>
+				</div>
+
+				<div
+					class="rounded-md border border-green-300 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full"
+							src="https://khothietke.net/wp-content/uploads/2021/04/PNGKhothietke.net-02341.png" alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Máy tính bảng</p>
+				</div>
+
+				<div
+					class="rounded-md border border-green-300 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full"
+							src="https://i.pinimg.com/originals/d9/26/92/d926929a407749d1e1a259193bc74885.png" alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Ram</p>
+				</div>
+
+				<div
+					class="rounded-md border border-green-300 w-1/12 flex flex-col justify-center items-center px-2 mb-2">
+					<div>
+						<img class="w-full" src="https://laptop88.vn/media/news/0411_ban-phim-logitech.png" alt="">
+					</div>
+					<p class="text-xs text-gray-600 text-center">Bàn phím</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="w-full mt-14 pb-10" style="background-color: #f8f7fc;">
+
+			<div class="flex justify-between w-full p-4">
+				<h1 class="text-gray-600 my-auto" style="font-weight: 100;">DÀNH CHO BẠN</h1>
+				<small class="flex flex-wrap md:flex-nowrap gap-4 items-center justify-center text-gray-500">
+					<form class="flex gap-3" action="/home" method="post">
+						<input type="text" class="hidden" name="pagecheck" th:value="${pagecheck}">
+						<div class="flex gap-3 items-center">
+							<label for="ASUS"
+								class="flex items-center gap-1 cursor-pointer transition-all hover:text-[#5ce9fa]">
+								<input type="radio" value="tenSP" class="hidden peer" th:checked="${dkcheck == 'tenSP'}"
+									name="dkcheck" id="ASUS">
+								<div
+									class="w-4 h-4 border-2 border-[#1434c3] rounded-full flex items-center justify-center peer-checked:bg-[#5ce9fa]">
+									<div class="w-2 h-2 bg-[#1434c3] rounded-full hidden peer-checked:block"></div>
+								</div>
+								<p>Tên</p>
+							</label>
+
+							<label for="ACER"
+								class="flex items-center gap-1 cursor-pointer transition-all hover:text-[#5ce9fa]">
+								<input type="radio" value="price" th:checked="${dkcheck == 'price'}" class="hidden peer"
+									name="dkcheck" id="ACER">
+								<div
+									class="w-4 h-4 border-2 border-[#1434c3] rounded-full flex items-center justify-center peer-checked:bg-[#5ce9fa]">
+									<div class="w-2 h-2 bg-[#1434c3] rounded-full hidden peer-checked:block"></div>
+								</div>
+								<p>Giá</p>
+							</label>
+
+							<label for="APPLE"
+								class="flex items-center gap-1 cursor-pointer transition-all hover:text-[#5ce9fa]">
+								<input type="radio" th:checked="${dkcheck == 'sale'}" value="sale" class="hidden peer"
+									name="dkcheck" id="APPLE">
+								<div
+									class="w-4 h-4 border-2 border-[#1434c3] rounded-full flex items-center justify-center peer-checked:bg-[#5ce9fa]">
+									<div class="w-2 h-2 bg-[#1434c3] rounded-full hidden peer-checked:block"></div>
+								</div>
+								<p>Giảm GIá</p>
+							</label>
+						</div>
+
+						<select th:selected="${styleSort}" name="styleSort" onchange="this.form.submit()"
+							class="border-2 border-[#1434c3] rounded-md px-3 py-1 text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#5ce9fa] transition-all">
+							<option value="1" th:selected="${styleSort== '1'}">Không sắp xếp</option>
+							<option value="2" th:selected="${styleSort =='2'}">Cao tới thấp</option>
+							<option value="3" th:selected="${styleSort =='3'}">Thấp tới cao</option>
+						</select>
+					</form>
+					<a href="#" class="text-[#1434c3] hover:underline hover:text-[#5ce9fa] transition-all">Xem tất
+						cả</a>
+				</small>
+
+
+			</div>
+			
+			<div th:replace="/view/sanphamList"></div>
+			
+			
+			<div class="flex justify-center mt-5 gap-3">
+				<a href="/home/1"
+					th:class="${previousF}+' shadow-[0_15px_10px_rgba(0,0,0,0.1)] px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md hover:text-white hover:bg-blue-500'">
+					<div class="flex items-center -mx-1">
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-1 rtl:-scale-x-100" fill="none"
+							viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+						</svg>
+
+						<span class="mx-1">
+							previous
+						</span>
+					</div>
+				</a>
+
+				<a th:href="@{|/home/${pageNumber - 1}|}"
+					class="hidden px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:inline shadow-[0_15px_10px_rgba(0,0,0,0.1)] hover:text-white hover:bg-blue-500"
+					th:text="${pageNumber - 1}">
+					1
+				</a>
+
+				<a th:href="@{|/home/${pageNumber}|}"
+					class="hidden px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:inline shadow-[0_15px_10px_rgba(0,0,0,0.1)] hover:text-white hover:bg-blue-500"
+					th:text="${pageNumber }">
+					2
+				</a>
+
+				<a th:href="@{|/home/${pageNumber + 1}|}"
+					class="hidden px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:inline shadow-[0_15px_10px_rgba(0,0,0,0.1)] hover:text-white hover:bg-blue-500"
+					th:text="${pageNumber + 1}">
+					3
+				</a>
+
+
+				<a th:href="@{|/home/${next}|}"
+					th:class="${nextF}+' shadow-[0_15px_10px_rgba(0,0,0,0.1)] px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md hover:text-white hover:bg-blue-500'">
+					<div class="flex items-center -mx-1">
+						<span class="mx-1">
+							Next
+						</span>
+
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-1 rtl:-scale-x-100" fill="none"
+							viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div id="headed">
+
+		<script src="slider.js"></script>
+	</div>
+
+</body>
+
+</html>

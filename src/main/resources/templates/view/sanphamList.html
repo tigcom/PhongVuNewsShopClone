@@ -1,0 +1,37 @@
+
+
+
+       
+       
+		<div  id="sanpham5" class=" flex flex-wrap w-11/12 gap-1 justify-center mx-auto ">
+			<th:block th:each="sp : ${listsp}">
+				<div class="bg-white hover:bg-black w-1/6 group  hover:rounded-lg overflow-hidden text-left p-4 transition-all duration-200">
+					<img class="w-full rounded-lg" th:src="@{|/image/${sp.listhinh[0].duongDanHinh}|}"  alt="">
+					 <div class="mt-1">
+						<a class="group-hover:text-white font-medium text-gray-400 text-sm" 
+						   th:href="@{|/home/chitiet/${sp.MaSP}|}" 
+						   th:text="${#strings.length(sp.tenSP) > 25 ? #strings.substring(sp.tenSP, 0, 25) + '...' : sp.tenSP}">
+						</a>
+
+<br>
+						<small  class="text-gray-600 tracking-tight my-1 leading-tight h-12 overflow-hidden block" >
+							<small th:text="${sp.moTa}" class="block h-4/5 overflow-hidden">
+								
+							</small>
+						</small>
+						<h3 class="font-semibold group-hover:text-blue-300 text-blue-800 text-sm" th:text="${#numbers.formatDecimal(sp.price *( (100 - sp.sale)/100), 1, 'COMMA', 2, 'POINT')}"> <span class="underline">đ</span></h3>
+						<small style="font-size: 70%;" class="flex"><span
+								style="text-decoration: line-through;color: rgb(161, 161, 161);" th:text="${#numbers.formatDecimal(sp.price, 1, 'COMMA', 2, 'POINT')}"><span
+									style="text-decoration: underline;">đ</span></span>&nbsp;
+								<p class="group-hover:text-blue-300 text-blue-800">- <th:block  th:text="${sp.sale}"></th:block> %</p>
+						</small>
+					   
+					</div>
+					<a class="block  group-hover:rounded-3xl group-hover:text-blue-300 group-hover:border-blue-400 text-center py-1 text-sm border-blue-800 border my-3 text-blue-800 rounded" 
+					 th:href="@{|/sanpham/giohang/add/${sp.MaSP}|}">Thêm vào giỏ</a>
+
+				</div>
+			</th:block>
+		</div>
+   
+<!--   <script src="datasp2.js"></script>--> 

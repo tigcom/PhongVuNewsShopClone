@@ -1,0 +1,116 @@
+<div class="container mx-auto">
+	<form action="/sanpham/create/sanpham" method="POST" enctype="multipart/form-data" class="flex gap-5 flex-wrap">
+		<p class="py-3 text-gray-600 font-bold w-full text-center">Thông tin
+			<th:block th:text="${loaihang.tenLoaiHang}"></th:block>
+			(<th:block th:text="${loaihang.maLoaiHang}"></th:block>)
+		</p>
+		<input name="lh.maLoaiHang" class="hidden" th:value="${loaihang.maLoaiHang}">
+		<div id="hinhanh"
+			class="flex flex-col items-center w-3/12 rounded-lg shadow-[0_0_15px_0px_rgb(244,244,244)] bg-white">
+			<label for="images" class="block text-sm font-medium text-gray-700">Chọn ảnh (Tối đa 6 ảnh)</label>
+			<input type="file" name="images" id="images" multiple accept="image/*"
+				class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+			<div id="image-preview" class="mt-4 grid grid-cols-3 gap-4">
+			</div>
+			<hr>
+
+			<div class="flex flex-wrap p-4" th:if=" ${sp.listhinh != null}">
+				<p class="text-gray-500 m-3 w-full">Ảnh Hiện tại</p>
+				<th:block th:each="ha : ${sp.listhinh}">
+					<input class="hidden" name="anhcu" th:value="${ha.duongDanHinh}" type="text">
+					<img class="rounded-md h-auto w-1/6" th:src="@{|/image/${ha.duongDanHinh}|}">
+				</th:block>
+			</div>
+		</div>
+		<div
+			class="grid grid-cols-1 p-4 md:grid-cols-2 gap-6 w-8/12 rounded-lg shadow-[0_0_15px_0px_rgb(244,244,244)] bg-white">
+			<div>
+				<label for="product-name" class="block text-sm font-medium text-gray-700">Tên sản phẩm</label>
+				<input type="text" name="tenSP" th:value="${sp.tenSP}" placeholder="Nhập tên thiết bị âm thanh"
+					class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+			</div>
+			<th:block th:if="${sp.maSP != null}">
+				<input class="hidden" name="maSP" type="text" th:value="${sp.maSP}">
+			</th:block>
+			<div>
+				<label for="price" class="block text-sm font-medium text-gray-700">Giá</label>
+				<input type="number" name="price" th:value="${sp.price}" placeholder="Nhập giá thiết bị"
+					class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+			</div>
+			<div>
+				<label for="sale" class="block text-sm font-medium text-gray-700">Giảm giá </label>
+				<input type="number" name="sale" th:value="${sp.sale}"
+					class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+			</div>
+			<div>
+				<label for="product-name" class="block text-sm font-medium text-gray-700">Tiêu đề</label>
+				<input type="text" name="title" th:value="${sp.title}"
+					class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+			</div>
+			<div>
+				<label for="product-name" class="block text-sm font-medium text-gray-700">Giới thiệu</label>
+				<input type="text" name="moTa" th:value="${sp.moTa}"
+					class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+			</div>
+			<div class="md:col-span-2">
+				<label for="description" class="block text-sm font-medium text-gray-700">Mô tả chi tiết</label>
+				<textarea name="thongTinChiTiet" th:text="${sp.thongTinChiTiet}" rows="4"
+					placeholder="Nhập mô tả chi tiết về thiết bị âm thanh"
+					class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2"></textarea>
+			</div>
+			<th:block th:each="tt: ${loaihang.listtt}">
+				<div>
+					<input name="thuocTinh" th:value="${tt.maThuocTinh}" class="hidden">
+					<label class="block text-sm font-medium text-gray-700" th:text="${tt.tenThuocTinh}"></label>
+
+					<th:block th:if="${sp.maSP != null}">
+						<input type="text" name="giaTri"
+							th:value="${@thongTinThuocTinhServiceImpl.getBySPandTT(tt.maThuocTinh,sp.maSP).getGiaTri()}"
+							class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+					</th:block>
+
+					<th:block th:if="${sp.maSP == null}">
+						<input type="text" name="giaTri" class="mt-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-[#61ebf6] focus:border-[#61ebf6] px-4 py-2">
+					</th:block>
+
+				</div>
+			</th:block>
+
+
+
+			<div class="my-3 flex justify-center space-x-4 w-full ">
+				<button type="reset"
+					class="w-24 py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#61ebf6]">
+					Reset
+				</button>
+				<button type="submit"
+					class="w-24 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#1434c3] hover:bg-[#61ebf6] focus:outline-none focus:ring-2 focus:ring-[#61ebf6]">
+					Lưu
+				</button>
+			</div>
+		</div>
+
+
+	</form>
+</div>
+
+<script>
+	const imageInput = document.getElementById('images');
+	const previewContainer = document.getElementById('image-preview');
+
+	imageInput.addEventListener('change', function (event) {
+		previewContainer.innerHTML = '';
+		const files = event.target.files;
+		for (let i = 0; i < files.length && i < 6; i++) {
+			const file = files[i];
+			const reader = new FileReader();
+			reader.onload = function (e) {
+				const img = document.createElement('img');
+				img.src = e.target.result;
+				img.classList.add('w-full', 'h-auto', 'rounded-md');
+				previewContainer.appendChild(img);
+			};
+			reader.readAsDataURL(file);
+		}
+	});
+</script>
